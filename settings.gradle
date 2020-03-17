@@ -1,0 +1,2 @@
+rootProject.name='GoogleAdMobExample'
+include ':app'
