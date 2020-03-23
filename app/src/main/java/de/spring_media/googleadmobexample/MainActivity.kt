@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val numOfBanners = 25
+    private val numOfBanners = 25
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,19 +20,16 @@ class MainActivity : AppCompatActivity() {
         MobileAds.initialize(this) {}
 
         val linearLayoutManager = LinearLayoutManager(this)
-        val recyclerViewAdapter = WidgetAdapter(LayoutInflater.from(this@MainActivity)).apply {
+        val items = mutableListOf<AdRequest>()
+        val recyclerViewAdapter = CustomWidgetAdapter(LayoutInflater.from(this@MainActivity)).apply {
             (0 until numOfBanners).forEach { _ ->
                 addWidget { BannerAdWidget() }
+                items.add(AdRequest.Builder().build())
             }
         }
         recyclerView.apply {
             layoutManager = linearLayoutManager
             adapter = recyclerViewAdapter
-            val items = mutableListOf<AdRequest>()
-            (0 until numOfBanners).forEach { _ ->
-                items.add(AdRequest.Builder().build())
-            }
-
             recyclerViewAdapter.setItems(items)
         }
     }

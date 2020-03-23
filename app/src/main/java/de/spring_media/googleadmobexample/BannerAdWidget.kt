@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.banner_ad_viewholder.view.*
 
 class BannerAdWidget: Widget<AdRequest>(R.layout.banner_ad_viewholder) {
 
-    lateinit var bannerAd: AdView
+    private lateinit var bannerAd: AdView
 
     override fun onViewCreated(view: View) {
         bannerAd = view.adView
